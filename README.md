@@ -1,1 +1,1 @@
-# SWC
+# Sample codes for SWC practice

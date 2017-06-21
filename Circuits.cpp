@@ -11,20 +11,24 @@ int n;
 int dfs(int root)
 {
 	int i, flag = 0;
+	int max = 0;
+	for (i = 0; i < n; i++)
+	if (a[root][i] == 1)
+	{
+		flag = 1;
+		//return cost[root][i] + dfs(i);
+		max = max<cost[root][i] + dfs(i) ? cost[root][i] + dfs(i) : max;
+	}
 
-	for (i = 0; i < n;i++)
-		if (a[root][i] == 1)
-		{
-			flag = 1;
-			return cost[root][i] + dfs(i);
-		}
-	
 	if (flag == 0)	return 0;
+	return max;
 }
 
 int main()
 {
 	int maxpath[MAXSIZE], max = 0, maxnode = -1;
+
+	cin >> n;
 
 	int i, j;
 	for (i = 0; i < n; i++)
@@ -33,8 +37,6 @@ int main()
 		a[i][j] = 0;
 		cost[i][j] = 0;
 	}
-
-	cin >> n;
 
 	i = 0;
 	while (i < n)
@@ -47,9 +49,9 @@ int main()
 		}
 	}
 
-	for (i = 0; i < n;i++)
-		for (j = 0; j < n;j++)
-			if (a[i][j] == 1)	cin >> cost[i][j];
+	for (i = 0; i < n; i++)
+	for (j = 0; j < n; j++)
+	if (a[i][j] == 1)	cin >> cost[i][j];
 
 	for (i = 0; i < n; i++)
 	{
@@ -63,6 +65,6 @@ int main()
 	}
 
 	cout << "Critical path = " << max << " starting from node " << maxnode;
-	while (1);
+	//while (1);
 	return 0;
 }
